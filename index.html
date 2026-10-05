@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Audio Flow Player</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body data-theme="midnight">
+  <main class="app-shell">
+    <section class="player" aria-label="Музичний плеєр">
+      <div class="cover cover-style-art" id="cover" aria-hidden="true">
+        <img id="coverImage" class="cover-image" alt="">
+        <div class="disc">
+          <span></span>
+        </div>
+        <div class="bars">
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+          <i></i>
+        </div>
+      </div>
+
+      <div class="track-info">
+        <p class="eyebrow">Audio Flow</p>
+        <h1 id="trackTitle">Обери трек</h1>
+        <p id="trackArtist">Додай аудіофайли або запусти демо-трек</p>
+        <p id="trackAlbum" class="album-name">Альбом з'явиться тут, якщо він є в mp3-тегах</p>
+      </div>
+
+      <audio id="audio" preload="metadata"></audio>
+
+      <div class="timeline">
+        <span id="currentTime">0:00</span>
+        <input type="range" id="progress" value="0" min="0" max="100" step="0.1" aria-label="Прогрес треку">
+        <span id="duration">0:00</span>
+      </div>
+
+      <div class="controls" aria-label="Керування відтворенням">
+        <button class="icon-btn" id="shuffle" type="button" aria-label="Перемішати треки" title="Shuffle">⇄</button>
+        <button class="icon-btn" id="prev" type="button" aria-label="Попередній трек" title="Попередній">⏮</button>
+        <button class="play-btn" id="playPause" type="button" aria-label="Відтворити" title="Відтворити">▶</button>
+        <button class="icon-btn" id="next" type="button" aria-label="Наступний трек" title="Наступний">⏭</button>
+        <button class="icon-btn" id="repeat" type="button" aria-label="Повторювати трек" title="Repeat">↻</button>
+      </div>
+
+      <div class="options">
+        <label class="volume-control" for="volume">
+          <span id="volumeIcon" aria-hidden="true">Гучність</span>
+          <input type="range" id="volume" value="80" min="0" max="100" aria-label="Гучність">
+        </label>
+
+        <label class="select-control" for="speed">
+          <span>Швидкість</span>
+          <select id="speed" aria-label="Швидкість відтворення">
+            <option value="0.75">0.75x</option>
+            <option value="1" selected>1x</option>
+            <option value="1.25">1.25x</option>
+            <option value="1.5">1.5x</option>
+            <option value="2">2x</option>
+          </select>
+        </label>
+
+        <label class="select-control" for="visualStyle">
+          <span>Стиль</span>
+          <select id="visualStyle" aria-label="Стиль обкладинки">
+            <option value="art" selected>Обкладинка</option>
+            <option value="vinyl">Вініл</option>
+            <option value="spectrum">Спектр</option>
+            <option value="poster">Постер</option>
+          </select>
+        </label>
+
+        <label class="select-control" for="themeSelect">
+          <span>Тема</span>
+          <select id="themeSelect" aria-label="Кольорова тема">
+            <option value="midnight" selected>Midnight</option>
+            <option value="neon">Neon</option>
+            <option value="sunset">Sunset</option>
+            <option value="ice">Ice</option>
+            <option value="mono">Mono</option>
+          </select>
+        </label>
+      </div>
+
+      <details class="customizer">
+        <summary>Кастомізація</summary>
+        <div class="customizer-grid">
+          <label class="color-control" for="accentPicker">
+            <span>Акцент</span>
+            <input id="accentPicker" type="color" value="#48c6a8" aria-label="Акцентний колір">
+          </label>
+
+          <label class="range-control" for="radiusRange">
+            <span>Заокруглення</span>
+            <input id="radiusRange" type="range" min="8" max="30" value="18" aria-label="Заокруглення інтерфейсу">
+          </label>
+
+          <label class="select-control" for="densitySelect">
+            <span>Щільність</span>
+            <select id="densitySelect" aria-label="Щільність інтерфейсу">
+              <option value="comfortable" selected>Comfort</option>
+              <option value="compact">Compact</option>
+            </select>
+          </label>
+
+          <label class="toggle-control" for="motionToggle">
+            <input id="motionToggle" type="checkbox" checked>
+            <span>Анімації</span>
+          </label>
+
+          <button class="reset-btn" id="resetCustomization" type="button">Скинути</button>
+        </div>
+      </details>
+    </section>
+
+    <aside class="library" aria-label="Плейлист">
+      <div class="library-header">
+        <div>
+          <p class="eyebrow">Плейлист</p>
+          <h2>Мої треки</h2>
+        </div>
+        <label class="file-btn" for="fileInput">Додати</label>
+        <input id="fileInput" type="file" accept="audio/*" multiple>
+      </div>
+
+      <ul id="playlist" class="playlist"></ul>
+
+      <p class="hint">Space - play/pause, ←/→ - перемотка, ↑/↓ - гучність.</p>
+    </aside>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
